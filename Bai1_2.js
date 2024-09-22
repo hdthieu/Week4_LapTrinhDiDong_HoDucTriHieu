@@ -7,7 +7,9 @@ export default function App() {
   const [arr, setArr] = useState([0, 1, 2]);
 
   const arrIncrease = () => {
-    setArr(() => {});
+    arr.map((item) => {
+      return item + 1;
+    });
   };
   return (
     <View>
@@ -29,10 +31,19 @@ export default function App() {
 
       <View>
         <Text style={{ fontSize: 30 }}>Câu 2</Text>
-      
+        <Button
+          title="Tăng số trong mảng"
+          onPress={() => {
+            setArr();
+          }}
+        />
+        {arr.map((item, index) => (
+          <Text style={{ fontSize: 24 }} key={index}>
+            {item}
+          </Text>
+        ))}
       </View>
     </View>
   );
 }
 
-const styles = StyleSheet.create({});
