@@ -11,8 +11,20 @@ import {
 import { Card } from 'react-native-paper';
 
 export default function App() {
-  const [price, setPrice] = useState([]);
-
+  const [price, setPrice] = useState(141800);
+  const [quantity, setQuantity] = useState(1);
+  const hanldeCalPrice = () => {
+    return price * quantity;
+  };
+  const handleIncreaseQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+  const handleDecreaseQuantity = () => {
+    if (quantity == 1) {
+      alert('Quantity không thể nhỏ hơn');
+      setQuantity(1);
+    } else setQuantity(quantity - 1);
+  };
   return (
     <View
       style={{
@@ -25,18 +37,16 @@ export default function App() {
       <View style={styles.header}>
         <View style={{ flex: 1, justifyContent: 'space-between' }}>
           <Image style={styles.image} source={require('./assets/anh3.png')} />
-          <Text>Mã giảm giá đã lưu</Text>
         </View>
         <View
           style={{
-            flex: 1,
-            justifyContent: 'space-between',
+            flex: 1.8,
             flexDirection: 'column',
           }}>
           <View
             style={{
-              flex: 3,
-              justifyContent: 'space-between',
+              flex: 1,
+              justifyContent: 'space-evenly',
             }}>
             <Text style={styles.title_header}>
               Nguyên hàm tích phân và ứng dụng
@@ -45,10 +55,36 @@ export default function App() {
             <Text style={styles.price}>141.800 đ</Text>
             <Text style={styles.price_discount}>141.800 đ</Text>
           </View>
-          <View>
-            <Text>Xem tại đây</Text>
+          <View style={{ flex: 0.3, flexDirection: 'row' }}>
+            <TouchableOpacity
+              style={styles.buttonTangGiam}
+              onPress={handleDecreaseQuantity}>
+              <Text style={styles.buttonTextTangGiam}>-</Text>
+            </TouchableOpacity>
+            <Text style={[styles.countText, { marginLeft: '10%' }]}>
+              {quantity}
+            </Text>
+            <TouchableOpacity
+              onPress={handleIncreaseQuantity}
+              style={[styles.buttonTangGiam, { marginLeft: '10%' }]}>
+              <Text style={styles.buttonTextTangGiam}>+</Text>
+            </TouchableOpacity>
+            <Text
+              style={[
+                styles.txtQuaTang,
+                { marginLeft: '20%', color: '#134FEC' },
+              ]}>
+              Mua sau
+            </Text>
           </View>
         </View>
+      </View>
+      <View style={[styles.header, { flex: 0.2, justifyContent: 'none' }]}>
+        <Text>Mã giảm giá đã lưu</Text>
+        <Text
+          style={[styles.txtQuaTang, { marginLeft: '10%', color: '#134FEC' }]}>
+          Xem tại đây
+        </Text>
       </View>
       <View style={styles.viewMaGG}>
         <View
@@ -67,7 +103,9 @@ export default function App() {
               width: 32,
               height: 16,
             }}></View>
-          <Text style={{ marginLeft: 20 }}>Mã giảm giá</Text>
+          <Text style={[styles.buttonText, { marginLeft: 20, color: 'black' }]}>
+            Mã giảm giá
+          </Text>
         </View>
         <View
           style={{
@@ -79,7 +117,13 @@ export default function App() {
           <TouchableOpacity
             style={[
               styles.button,
-              { backgroundColor: '#0A5EB7', width: 99, height: 45, borderRadius: 0, marginLeft:'30%' },
+              {
+                backgroundColor: '#0A5EB7',
+                width: 99,
+                height: 45,
+                borderRadius: 0,
+                marginLeft: '30%',
+              },
             ]}>
             <Text style={styles.buttonText}>Áp dụng</Text>
           </TouchableOpacity>
@@ -98,7 +142,7 @@ export default function App() {
       <View style={{ flex: 0.1, backgroundColor: '#C4C4C4' }}></View>
       <View style={styles.style_ttinh_ttien}>
         <Text style={[styles.txtQuaTang, { fontSize: 18 }]}>Tạm tính:</Text>
-        <Text style={styles.price}>141.800 đ</Text>
+        <Text style={styles.price}>{hanldeCalPrice()}đ</Text>
       </View>
 
       <View style={{ flex: 1.5, backgroundColor: '#C4C4C4' }}></View>
@@ -107,7 +151,7 @@ export default function App() {
           <Text style={[styles.txtQuaTang, { fontSize: 18, color: 'gray' }]}>
             Thành tiền
           </Text>
-          <Text style={styles.price}>141.800 đ</Text>
+          <Text style={styles.price}>{hanldeCalPrice()}đ</Text>
         </View>
         <View style={{ flex: 1, alignItems: 'center' }}>
           <TouchableOpacity
@@ -129,13 +173,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   viewMaGG: {
-    flex: 0.5,
+    flex: 0.6,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    // marginTop: 20,
+    marginTop: 20,
     marginLeft: '7%',
     marginRight: '7%',
-    paddingTop: '20%',
   },
   buttonText: {
     color: 'white',
@@ -188,5 +231,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginLeft: '7%',
     marginRight: '7%',
+  },
+  buttonTangGiam: {
+    width: 14.22,
+    height: 16,
+    backgroundColor: '#C4C4C4',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 4,
+  },
+  buttonTextTangGiam: {
+    width: 2.18,
+    height: 8,
+    fontWeight: 'bold',
+    color: 'black',
+    top: -7,
+    left: -2,
+  },
+
+  countText: {
+    fontFamily: 'Roboto',
+    fontSize: 15,
+    fontWeight: 700,
   },
 });
