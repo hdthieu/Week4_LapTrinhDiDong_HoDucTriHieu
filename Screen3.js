@@ -26,14 +26,7 @@ export default function App() {
     } else setQuantity(quantity - 1);
   };
   return (
-    <View
-      style={{
-        paddingTop: 40,
-        paddingLeft: 2,
-        paddingRight: 2,
-        flex: 1,
-        marginTop: 20,
-      }}>
+    <View style={styles.container}>
       <View style={styles.header}>
         <View style={{ flex: 1, justifyContent: 'space-between' }}>
           <Image style={styles.image} source={require('./assets/anh3.png')} />
@@ -87,22 +80,8 @@ export default function App() {
         </Text>
       </View>
       <View style={styles.viewMaGG}>
-        <View
-          style={{
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-            flexDirection: 'row',
-            height: 45,
-            borderWidth: 1,
-          }}>
-          <View
-            style={{
-              marginLeft: 20,
-              backgroundColor: '#F2DD1B',
-              width: 32,
-              height: 16,
-            }}></View>
+        <View style={styles.khungMaGiamGia}>
+          <View style={styles.item1MaGiamGia}></View>
           <Text style={[styles.buttonText, { marginLeft: 20, color: 'black' }]}>
             Mã giảm giá
           </Text>
@@ -165,6 +144,13 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    paddingTop: 40,
+    paddingLeft: 2,
+    paddingRight: 2,
+    flex: 1,
+    marginTop: 20,
+  },
   button: {
     height: 45,
     justifyContent: 'center',
@@ -253,5 +239,21 @@ const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     fontSize: 15,
     fontWeight: 700,
+  },
+
+  khungMaGiamGia: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    height: 45,
+    borderWidth: 1,
+  },
+
+  item1MaGiamGia: {
+    marginLeft: 20,
+    backgroundColor: '#F2DD1B',
+    width: 32,
+    height: 16,
   },
 });
